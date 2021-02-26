@@ -12,6 +12,7 @@ IoTs2采用ESP32-S2(Xtensa 32-bit LX7单核CPU，主频达240MHz) WiFi SoC，
 板载大功率开关型DC-DC(输出3.3V@1.2A)可为功能拓展板供电，支持单节锂电池供电输入。
 IoTs2采用双列(2x14)拓展接口和4P的mini-I2C(QWiic/STEMMA QT)拓展接口，
 即可将IoTs2嵌入系统拓展板内使用，也可以使用I2C总线拓展系统功能。
+IoTs2使用USB Type-C接口与程序开发主机(电脑)连接，
 IoTs2支持Scratch图形化编程语言和Python脚本编程语言，采用“拖放文件即下载程序”的操作模式，
 不依赖任何特定的软件环境。
 
