@@ -10,3 +10,11 @@ IoTs2是一种小体积的、低功耗的、低成本的、高计算性能的IoT
 以及USB接口，还支持WiFi(2.4GHz)高速无线网络接口。除了板载的可编程按钮、指示灯、RGB彩灯、视网膜级彩色LCD、加速度传感器等资源，
 IoTs2具有18个可编程I/O(呈DIP排列)。
 
+为了方便我们了解IoTs2的资源，下图给出IoTs2内部单元的组成框图。
+
+.. image::  ../_static/images/iots2_structure.jpg
+  :scale: 25%
+  :align: center
+
+
+

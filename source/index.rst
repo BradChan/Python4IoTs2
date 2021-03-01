@@ -81,6 +81,7 @@ IoTs2简介
 
 -------------------------------------
 
+
 .. toctree::
    :caption: IoTs2固件和开源库(Python版)
    :maxdepth: 1
@@ -92,11 +93,7 @@ IoTs2简介
 -------------------------------------
 
 .. toctree::
-   :caption: IoTs2固件和开源库(Python版)
+   :caption: IoTs2硬件
    :maxdepth: 1
    
-   iots2_hardware/schematic.rst
-   iots2_hardware/pcb.rst
-
--------------------------------------
-
+   iots2_hardware/schmatic.rst
