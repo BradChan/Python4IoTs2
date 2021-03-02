@@ -1,10 +1,10 @@
 使用LCD显示器显示文本
-======================
+========================
 
-BlueFi正面有一个1.3寸的彩色LCD屏幕，分辨率为240x240点阵，点间距和像素点都很小，这个屏幕几何达到视网膜级别(据说iPhone和iPad
-都采用视网膜级别的显示器)，显示文字或图案时非常细腻。在准备阶段我们已经介绍过BlieFi的LCD屏幕的用途，他是我们的控制台，无论任何
-时候只要脚本程序遇到错误停止执行时，详细的错误提示信息都会显示在这个屏幕上，方便我们快速排查问题所在，这一功能在执行Python等脚本
-程序的计算机相同中尤为重要。
+IoTs2有一个1.14寸的彩色LCD屏幕，分辨率为240x135点阵，点间距和像素点都很小，这个屏幕几何达到视网膜级别(据说iPhone和iPad都采用视网膜级别的显示器)，
+视网膜级显示器上显示文字或图案时非常细腻。在准备阶段我们已经介绍过IoTs2的LCD屏幕的用途，他是我们的控制台，
+无论任何时候只要脚本程序遇到错误停止执行时，详细的错误提示信息都会显示在这个屏幕上，方便我们快速排查问题所在，
+这一功能在执行Python等脚本程序的计算机相同中尤为重要。
 
 控制台只接受“print()”方法输出的信息和相同的提示信息等，如果用户编程需要使用LCD屏幕显示自己订制的信息，那就需要进一步了解BlueFi
 的LCD屏幕的用法。本节仅介绍如何显示简单的文本，虽然只是文本显示，但是颜色、字体大小和位置等都是可编程的。
@@ -21,24 +21,73 @@ BlueFi正面有一个1.3寸的彩色LCD屏幕，分辨率为240x240点阵，点�
 .. code-block::  python
   :linenos:
 
-    import time
-    from hiibot_bluefi.basedio import Button
-    from hiibot_bluefi.soundio import SoundIn
-    from hiibot_bluefi.screen import Screen
-    button = Button()
-    mic = SoundIn()
-    screen = Screen()
-    show_data = screen.simple_text_display(title="BlueFi LCD", title_scale=2, text_scale=2)
-    while True:
-        show_data[2].text = "A:{}".format(button.A)
-        show_data[3].text = "B:{}".format(button.B)
-        show_data[5].text = "SoundIn:{:.1f}".format(mic.sound_level)
-        show_data.show()
-        time.sleep(0.1)
+  import time
+  import displayio
+  import terminalio
+  from adafruit_display_text import label
+  from hiibot_iots2 import IoTs2
+  iots2 = IoTs2()
+  # define a group of text line
+  text_group = displayio.Group(max_size=8, scale=2)
+  # define a line of text (text0)
+  text0 = label.Label(terminalio.FONT, text="Hello IoTs2", max_glyphs=54,  color=(255,0,0))
+  text0.x = 0
+  text0.y = 0
+  text_group.append(text0)
+  # define a line of text (text1)
+  text1 = label.Label(terminalio.FONT, text="Hello IoTs2", max_glyphs=54, color=(192,63,0))
+  text1.x = 0
+  text1.y = 9
+  text_group.append(text1)
+  # define a line of text (text2)
+  text2 = label.Label(terminalio.FONT, text="Hello IoTs2", max_glyphs=54,  color=(127,127,0))
+  text2.x = 0
+  text2.y = 18
+  text_group.append(text2)
+  # define a line of text (text3)
+  text3 = label.Label(terminalio.FONT, text="Hello IoTs2", max_glyphs=54,  color=(0,255,0))
+  text3.x = 0
+  text3.y = 27
+  text_group.append(text3)
+  # define a line of text (text4)
+  text4 = label.Label(terminalio.FONT, text="Hello IoTs2", max_glyphs=54,  color=(0,127,127))
+  text4.x = 0
+  text4.y = 36
+  text_group.append(text4)
+  # define a line of text (text5)
+  text5 = label.Label(terminalio.FONT, text="Hello IoTs2", max_glyphs=54,  color=(0,0,255))
+  text5.x = 0
+  text5.y = 45
+  text_group.append(text5)
+  # define a line of text (text6)
+  text6 = label.Label(terminalio.FONT, text="Hello IoTs2", max_glyphs=54,  color=(127,0,127))
+  text6.x = 0
+  text6.y = 54
+  text_group.append(text6)
+  # define a line of text (text7)
+  text7 = label.Label(terminalio.FONT, text="Hello IoTs2", max_glyphs=54,  color=(255,0,0))
+  text7.x = 0
+  text7.y = 63
+  text_group.append(text7)
+  # show this group of text on the screen of IoTs2
+  iots2.screen.show(text_group)
+  s = ['Released', 'Pressed']
+  while True:
+      str = "button: {:d} / {}".format(iots2.button_state,s[iots2.button_state])
+      text0.text = str
+      text1.text = str
+      text2.text = str
+      text3.text = str
+      text4.text = str
+      text5.text = str
+      text6.text = str
+      text7.text = str
+      iots2.screen.show(text_group)
+      time.sleep(0.1)
 
-将本示例程序保存到BlueFi到/CIRCUITPY/code.py文件，执行程序的显示效果与控制台的显示效果做一个对比：
+将本示例程序保存到IoTs2到/CIRCUITPY/code.py文件，执行程序的显示效果与控制台的显示效果做一个对比：
 
-.. image:: /../../_static/images/bluefi_basics/lcd_font_zoom.jpg
+.. image:: /../../_static/images/iots2_basics/lcd_font_zoom.jpg
   :scale: 40%
   :align: center
 
@@ -63,22 +112,7 @@ BlueFi正面有一个1.3寸的彩色LCD屏幕，分辨率为240x240点阵，点�
 
 第8行是本示例程序的重点，我们使用Screen类的一个名叫simple_text_display子类，即实现多行简单文本显示的一组方法，使用这个子类允许你
 定义多行简单文本显示的所用的字体、标题、标题字的缩放倍数(默认为标准字体的2倍)、标题颜色，以及多行文本的字体缩放倍数(默认为标准字体)、颜色等。
-定义simple_text_display子类的接口原型：
 
-.. code-block::  python
-  :linenos:
-
-    def simple_text_display(  
-        title=None,                   # title
-        title_color=(255, 255, 255),  # title_color
-        title_scale=1,                # title_scale
-        text_scale=1,                 # text_scale
-        font=None,                    # used font
-        colors=None,                  # list of text_color
-    ):
-
-在本示例程序的“while True:”程序块内，前三行程序分别是指定三行文本的显示内容(我们把拟显示的变量格式为字符串用来显示)，show_data[i].text
-表示第i行文本的内容。调用show_data.show()函数只是更新多行文本显示到屏幕上。
 
 
 调整屏幕亮度和屏保

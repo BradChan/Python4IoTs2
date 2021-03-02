@@ -95,13 +95,13 @@ CIECUITPY，你的Python程序文件只需要拖放到CIRCUITPY磁盘即可，�
 
 你在使用过程中，或许会遇到以下问题，这里列举每一种问题的解决方法：
 
-  1) IoTs2与电脑连接后，未出现名为“CIRCUITPY”的磁盘，出现名为"NONAME"的磁盘
+  1) IoTs2与电脑连接后，未出现名为“CIRCUITPY”的磁盘，出现“NONAME”或其他名称的磁盘
 
     - 电脑的磁盘名称或卷标是可以修改的，你可以将"NONAME"卷标名称修改为"CIRCUITPY"即可。
 
   2) IoTs2与电脑连接后，未出现名为“CIRCUITPY”的磁盘，出现名为"IOTS2BOOT"的磁盘
 
-    - 如果连续按下IoTs2的复位按钮，IoTs2将自动进入Bootloader模式。拔掉USB数据线，重新插入电脑即可。
+    - 如果按下Boot按钮同时按下IoTs2的复位按钮然后释放复位按钮，IoTs2将自动进入Bootloader模式。拔掉USB数据线，重新插入电脑即可。
 
   3) IoTs2与电脑连接后，未出现任何(增加的可移动)磁盘
 
