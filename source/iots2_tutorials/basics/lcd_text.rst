@@ -1,7 +1,8 @@
 使用LCD显示器显示文本
 ========================
 
-IoTs2有一个1.14寸的彩色LCD屏幕，分辨率为240x135点阵，点间距和像素点都很小，这个屏幕几何达到视网膜级别(据说iPhone和iPad都采用视网膜级别的显示器)，
+IoTs2有一个1.14寸的彩色LCD屏幕，分辨率为240x135点阵，点间距和像素点都很小，
+这个屏幕几何达到视网膜级别(据说iPhone和iPad都采用视网膜级别的显示器)，
 视网膜级显示器上显示文字或图案时非常细腻。在准备阶段我们已经介绍过IoTs2的LCD屏幕的用途，他是我们的控制台，
 无论任何时候只要脚本程序遇到错误停止执行时，详细的错误提示信息都会显示在这个屏幕上，方便我们快速排查问题所在，
 这一功能在执行Python等脚本程序的计算机相同中尤为重要。
@@ -24,7 +25,7 @@ IoTs2有一个1.14寸的彩色LCD屏幕，分辨率为240x135点阵，点间距�
   import time
   import displayio
   import terminalio
-  from adafruit_display_text import label
+  from adafruit_display_text import label 
   from hiibot_iots2 import IoTs2
   iots2 = IoTs2()
   text_group = displayio.Group(max_size=8, scale=2)
@@ -117,7 +118,7 @@ IoTs2有一个1.14寸的彩色LCD屏幕，分辨率为240x135点阵，点间距�
 修改前后的IoTs2显示效果如下图所示：
 
 .. image:: /../../_static/images/iots2_tutorials/iots2_displayio_label_font_zoom.jpg
-  :scale: 10%
+  :scale: 5%
   :align: center
 
 对于“adafruit_display_text”模块的“label”类，其详细的属性和参数见“https://circuitpython.readthedocs.io/projects/display_text/en/latest/api.html?highlight=label”。
