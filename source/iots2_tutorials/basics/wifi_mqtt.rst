@@ -6,35 +6,35 @@
 QQ、wechat(微信)是人-人互联的即时通软件，MQTT(消息队列遥测传输，Message Queuing Telemetry Transport))是实现物-物互联的即时通协议。
 MQTT已经成为全球公认的IoT标准。
 
-虽然QQ和MQTT都诞生于上世纪末，但QQ很早就被全世界华人社区所接受并逐步淘汰传统的电话通讯，QQ即时通软件的成功成就了腾讯。然而，MQTT直到
-近10年才被广泛接受。虽然他们的技术方面几乎相近，但两种即时通所面向的业务领域却完全不同，MQTT是随着IoT技术的发展日趋成熟才逐步走进我们的视野。
+虽然QQ和MQTT都诞生于上世纪末，但QQ很早就被全世界华人社区所接受并逐步淘汰传统的电话通讯，QQ即时通软件的成功成就了腾讯。然而，
+MQTT直到近10年才被广泛接受。虽然他们的技术方面几乎相近，但两种即时通所面向的业务领域却完全不同，
+MQTT是随着IoT技术的发展日趋成熟才逐步走进我们的视野。
 
 本向导中我们将认识MQTT，并掌握MQTT的简单应用。
 
 关于MQTT
 ------------------------
 
-MQTT是构建在TCP/IP协议栈之上的基于客户端-服务器的消息发布/订阅(publish/subscribe)传输协议，属于轻量级的即时通讯协议，可以以极少的代码和
-有限的网络带宽的条件下为连接远程设备提供实时可靠的消息服务，在物联网、小型设备、移动应用等方面已有广泛的应用。按照七层OSI模型，MQTT与HTTP等
-一样属于TCP/IP的应用层协议。
+MQTT是构建在TCP/IP协议栈之上的基于客户端-服务器的消息发布/订阅(publish/subscribe)传输协议，属于轻量级的即时通讯协议，
+可以以极少的代码和有限的网络带宽的条件下为连接远程设备提供实时可靠的消息服务，在物联网、小型设备、移动应用等方面已有广泛的应用。
+按照七层OSI模型，MQTT与HTTP等一样属于TCP/IP的应用层协议。
 
-这里的几个关键词需要稍作解释：1) 构建在TCP/IP协议栈之上，根据MQTT所使用的TCP/IP协议栈的类型(如TCP, TLS(具备安全层传输控制的TCP), WS(
-web-socket)和WSS(具备安全加密传输的WS))，又将MQTT分为4种；2) 基于客户端-服务器，说明MQTT系统的设备分为两种角色：客户端和服务器，一般来说
-消息的发布者和订阅者都是客户端，服务器仅仅负责消息的路由和分发；3) 消息发布/订阅，这是MQTT协议的基本工作模式，与传统的网络通讯相比，这种消息
-发布/订阅模式可以极大地降低网络带宽的需求，传统的消息发布和接收是一对一或一对多(广播)，一对一必定会增加网络带宽需求，而MQTT的消息发布者并不
-关心消息发个谁，只有订阅该消息的订阅者才会自动收到MQTT服务器转发的消息。
+这里的几个关键词需要稍作解释：1) 构建在TCP/IP协议栈之上，根据MQTT所使用的TCP/IP协议栈的类型(如TCP, TLS(具备安全层传输控制的TCP), 
+WS(web-socket)和WSS(具备安全加密传输的WS))，又将MQTT分为4种；2) 基于客户端-服务器，说明MQTT系统的设备分为两种角色：客户端和服务器，
+一般来说消息的发布者和订阅者都是客户端，服务器仅仅负责消息的路由和分发；3) 消息发布/订阅，这是MQTT协议的基本工作模式，与传统的网络通讯相比，
+这种消息发布/订阅模式可以极大地降低网络带宽的需求，传统的消息发布和接收是一对一或一对多(广播)，一对一必定会增加网络带宽需求，
+而MQTT的消息发布者并不关心消息发个谁，只有订阅该消息的订阅者才会自动收到MQTT服务器转发的消息。
 
-.. image:: /../../_static/images/bluefi_basics/mqtt_orgin.png
+.. image:: /../../_static/images/iots2_tutorials/mqtt_orgin.png
   :scale: 100%
   :align: center
 
 据考证，MQTT协议是上世纪末IBM在帮助石油和天然气公司客户设计有效的数据传输协议时首次提出，当时，为了实现数千英里长的石油和天然气管道的无人值守监控，
-采取的设计方案是将管道上的传感器数据通过卫星通信传输到监控中心。如上图所示。今天我们所看到的MQTT协议的特征恰好满足当年石油和天然气公司向IBM提出的
-需求。
+采取的设计方案是将管道上的传感器数据通过卫星通信传输到监控中心。如上图所示。今天我们所看到的MQTT协议的特征恰好满足当年石油和天然气公司向IBM提出的需求。
 
 MQTT的消息发布者/订阅者之间关系示意，如下图所示：
 
-.. image:: /../../_static/images/bluefi_basics/mqtt_0.png
+.. image:: /../../_static/images/iots2_tutorials/mqtt_0.png
   :scale: 100%
   :align: center
 
@@ -44,32 +44,32 @@ MQTT的工作流程
 
 下面我们用三张图来简要说明MQTT的连接服务器、消息订阅、消息发布和推送的基本流程，先了解这些流程对于后面如何使用MQTT协议非常有益。
 
-.. image:: /../../_static/images/bluefi_basics/mqtt_1.jpg
+.. image:: /../../_static/images/iots2_tutorials/mqtt_1.jpg
   :scale: 100%
   :align: center
 
 (某个客户端使用TCP协议连接到MQTT服务器/消息代理的流程)
 
-.. image:: /../../_static/images/bluefi_basics/mqtt_2.jpg
+.. image:: /../../_static/images/iots2_tutorials/mqtt_2.jpg
   :scale: 100%
   :align: center
 
 (某个客户端订阅指定的主题topic消息的流程)
 
-.. image:: /../../_static/images/bluefi_basics/mqtt_3.jpg
+.. image:: /../../_static/images/iots2_tutorials/mqtt_3.jpg
   :scale: 100%
   :align: center
 
 (客户端A发布一个主题消息并由MQTT服务器/代理推送给该消息的订阅者的流程)
 
 
-将BlueFi连接到MQTT服务器
+将IoTs2连接到MQTT服务器
 ----------------------------
 
-当我们初步了解MQTT协议和工作流程之后，我们开着手让BlueFi连接到MQTT服务器，为了简化问题，我们首先是使用匿名方式登录MQTT服务器
-免去注册获取ID和密码的过程。
+当我们初步了解MQTT协议和工作流程之后，我们开着手让IoTs2连接到MQTT服务器，为了简化问题，
+我们首先是使用匿名方式登录MQTT服务器免去注册获取ID和密码的过程。
 
-我们用一个示例程序来掌握如何让BlueFi连接到MQTT服务器，代码如下：
+我们用一个示例程序来掌握如何让IoTs2连接到MQTT服务器，代码如下：
 
 .. code-block::  python
   :linenos:
@@ -134,7 +134,7 @@ BlueFi和电脑互推消息
 
 下图中演示如何使用MQTTBox软件创建新的MQTT客户端、订阅指定主题的消息、发布特定主题的消息。
 
-.. image:: /../../_static/images/bluefi_basics/mqtt_box_use.gif
+.. image:: /../../_static/images/iots2_tutorials/mqtt_box_use.gif
   :scale: 60%
   :align: center
 
