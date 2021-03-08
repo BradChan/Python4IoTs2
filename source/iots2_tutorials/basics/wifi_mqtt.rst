@@ -69,45 +69,37 @@ MQTT的工作流程
 当我们初步了解MQTT协议和工作流程之后，我们开着手让IoTs2连接到MQTT服务器，为了简化问题，
 我们首先是使用匿名方式登录MQTT服务器免去注册获取ID和密码的过程。
 
-我们用一个示例程序来掌握如何让IoTs2连接到MQTT服务器，代码如下：
+我们用一个示例程序来掌握如何让IoTs2连接到MQTT服务器并订阅和发布消息。具体的代码如下：
 
 .. code-block::  python
   :linenos:
 
   import time
-  from hiibot_bluefi.wifi import WIFI
-  from hiibot_bluefi.mqtt import MQTTClient
-  wifi=WIFI()
-
-  while not wifi.esp.is_connected:
-      try:
-          wifi.wifi.connect()
-      except RuntimeError as e:
-          print("could not connect to AP, retrying: ", e)
-          continue
-
-  print("Connected to", str(wifi.wifi.ssid, "utf-8"), "\tRSSI: {}".format(wifi.wifi.signal_strength) )
-  print("My IP address is {}".format(wifi.wifi.ip_address()))
-
-  def cb_testTopic1(message):
-      print(message)
-      mqttClient.publishMessage("/test/topic2", message+" (BlueFi relay1)")
-
-  def cb_testTopic2(message):
-      print(message)
-      mqttClient.publishMessage("/test/topic3", message+" (BlueFi relay2)")
-
-  mqttClient = MQTTClient(wifi=wifi, server="www.hiibotiot.com")
-  mqttClient.subscribeTopic("/test/topic1", cb_testTopic1)
-  mqttClient.subscribeTopic("/test/topic2", cb_testTopic2)
+  from hiibot_iots2 import IoTs2
+  from hiibot_iots2_mqtt import MQTTClient
+  iots2 = IoTs2()
+  iots2.pixels[0] = (255, 63, 0)
+  iots2.screen.rotation = 180
+  mqttClient = MQTTClient()
+  msgTopic1 = "/test/topic1"
+  msgTopic2 = "/test/topic2"
+  msgTopic3 = "/test/topic3"
+  def testTopic1(message):
+      print('New message (topic="{}", message="{}")'.format(msgTopic1, message))
+      mqttClient.publishMessage(msgTopic2, message)
+  def testTopic2(message):
+      print('New message (topic="{}", message="{}")'.format(msgTopic2, message))
+      mqttClient.publishMessage(msgTopic3, message)
+  mqttClient.subscribeTopic(msgTopic1, testTopic1)
+  mqttClient.subscribeTopic(msgTopic2, testTopic2)
   mqttClient.connect()
-
   while True:
-      time.sleep(0.05)
       mqttClient.loop()
+      time.sleep(0.005)
 
-看起来这个示例程序很长，如果你已经学习过前一个向导，前15行程序代码是你熟悉的，这些程序只有一个目的：将BlueFi连接到互联网。我们要想让BlueFi
-连接到MQTT服务器，就必须先让BlueFi连接到互联网！
+根据前两个向导，IoTs2的WiFi必须首先连接到一个指定的AP，只要该AP与互联网是连通的，那么IoTs2就可以与MQTT服务器(消息转发代理)连接，
+即可订阅、发布特定主题的消息。虽然上面的代码中并没有WiFi及其连接相关的代码，我们使用“/CIRCUITPY/lib/hiibot_iots2_mqtt.py”模块中的MQTTClient类，
+在该类中会根据联网的需要适时地让IoTs2的WiFi连接到AP，并连接到MQTT代理，这些操作都在第7行代码中完成，
 
 示例程序包含有两个函数cb_testTopic1和cb_testTopic2。你会不会觉得奇怪？这两个函数并没有被其他程序调用。这两个函数属于“发生特定事件后响应
 该事件的回调函数”，你可以把他们想象成Scratch中的事件。示例程序的第25和26行分别从MQTT服务器订阅了两个主题消息，并指定cb_testTopic1函数作为
