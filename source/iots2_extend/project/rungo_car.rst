@@ -480,6 +480,109 @@ AGV避障
 
 三国演义中诸葛亮在长江边摆的“巨石阵”让诸多敌人有进无出。你能使用今天的科技手段帮助RunGo走出纸杯模拟的“诸葛巨石阵”吗？
 
+示例程序代码如下：
+
+.. code-block::  python
+  :linenos:
+
+  import time
+  import random
+  from hiibot_iots2 import IoTs2
+  from hiibot_iots2_rungo import RunGo
+  car = RunGo()
+  iots2 = IoTs2()
+  car.stop()
+  iots2.screen.rotation = 180
+  print('Run Go!')
+  minDistance = 8.0
+  maxDistance = 15.0
+  badDistance = 440.00
+  carMaxSpeed = 80
+  carMinSpeed = 60
+  pdt = [0, 0, 0]
+  running = False
+  idleCnt = 0
+  # 检查是否堵住(堵住时连续的距离变化非常小)
+  def stallCheck(dt) :
+      dif0 = abs(pdt[0] - pdt[1])
+      dif1 = abs(pdt[1] - pdt[2])
+      dif2 = abs(pdt[2] - dt)
+      pdt[0] = pdt[1]
+      pdt[1] = pdt[2]
+      pdt[2] = dt
+      if 0.4>max(dif0, dif1, dif2):
+          return True
+      else:
+          return False
+  # 随机转弯
+  def randomTurn():
+      global car, carMinSpeed, carMaxSpeed
+      car.stop()
+      time.sleep(0.01)
+      dir = random.randint(0,2)
+      if dir==1:
+          car.motor(carMinSpeed, -carMinSpeed)
+      else:
+          car.motor(-carMinSpeed, carMinSpeed)
+      time.sleep(0.5)
+      car.motor(carMaxSpeed, carMaxSpeed)
+  # 先后退一段距离再随机转弯    
+  def backThenRandomRurn():
+      global car, carMaxSpeed
+      car.stop()
+      time.sleep(0.01)
+      car.motor(-carMaxSpeed, -carMaxSpeed)
+      time.sleep(0.4)
+      randomTurn()
+  # 主循环：检查是否待机，待机则关闭彩灯；检查启动(A)或停止(B)；
+  # 启动后检测障碍物距离并决定前进/随机转弯/先后退再随机转弯等3种行为
+  while True:
+      idleCnt += 1
+      if idleCnt>50000:
+          for i in range(3):
+              car.pixels[i] = (0,0,0)
+          car.pixels.show()
+      else:
+          car.pixelsRotation()
+      car.buttons_update()
+      if car.button_A_wasPressed:
+          running = True
+          idleCnt = 0
+          print('running')
+      if car.button_B_wasPressed:
+          running = False
+          car.stop()
+          idleCnt = 0
+          print('stopping')
+      if running:
+          time.sleep(0.01)
+          idleCnt = 0
+          dt = car.distance
+          if stallCheck(dt):
+              backThenRandomRurn()
+              continue
+          if dt<minDistance or dt>badDistance:
+              backThenRandomRurn()   
+          elif dt<maxDistance:
+              randomTurn()
+          else:
+              car.motor(carMaxSpeed, carMaxSpeed)
+      else:
+          pass
+
+确保IoTs2模块正确地插在RunGo小车上，并开启RunGo电源(RunGo的电源开关旁边有一颗红色LED的亮/灭指示电源状态)，
+使用USB数据线将IoTs2模块与电脑连接好，当电脑资源管理器中出现CIRCUITPY磁盘后，将上述的示例代码保存到IoTs2的/CIRCUITPY/code.py文件，
+当程序执行时按下RunGo的A按钮，并将RunGo小车放在“巨石阵”中，观察RunGo如何走出我们的“巨石阵”。
+
+考虑到纸杯或其他物品组成的“巨石阵”中障碍物之间的距离，建议根据测试结果修改上述示例程序的第10行和第11行程序代码等号右边的数值，
+这两行语句常数值大小决定RunGo距离障碍物多远就开始随机转弯(为什么是“随机”?) 多远则先后退再随机转弯。
+如果你设计的“巨石阵”中障碍物之间距离较小则将两行程序等号右边的数值也随之修改为更小的值，反之亦然。
+
+本示例程序的关键逻辑包括：判断RunGo是否被堵、判断前方障碍物距离是否小于允许的最小距离或不大于最大距离等几种情况的识别，
+我们根据每一种情况来确定RunGo的下一步行为：继续前进、随机转弯、先后退再随机转弯等。
+
+此外，我们使用RunGo的按钮A和B控制RunGo是否开始“闯阵”或停止，在程序运行期间保持RunGo底部的3个RG彩灯不断地旋转，
+如果停止时间超过25秒则关闭这些彩灯以节能。
 
 --------------------------------
 
@@ -488,7 +591,83 @@ RunGo的“趋光性”
 
 RunGo的前部带有一对光线强度传感器能够识别前方光线的方向(哪个方向的光线更亮)
 
+.. code-block::  python
+  :linenos:
 
+  import time
+  from hiibot_iots2 import IoTs2
+  from hiibot_iots2_rungo import RunGo
+  iots2 = IoTs2()
+  car = RunGo()
+  car.stop()
+  iots2.screen.rotation = 180
+  print('Run Go!')
+  minDistance = 8.0
+  maxDistance = 15.0
+  carMaxSpeed = 100
+  speedsList = [carMaxSpeed-30, carMaxSpeed-20, carMaxSpeed-10, carMaxSpeed]
+  running = False
+  idleCnt = 0
+  diff = 200
+  preDiff = 0
+  df_scale = 300
+  def checkDirection():
+      global car, diff, preDiff, df_scale
+      ls, rs = car.leftLightSensor, car.rightLightSensor
+      preDiff = diff
+      diff = abs(ls-rs)
+      ediff = abs(diff-preDiff)
+      if diff<df_scale:
+          if diff>preDiff and ediff>100:
+              return 3
+          else:
+              return 0
+      elif ls>rs:
+          return 1
+      else:
+          return 2
+  while True:
+      idleCnt += 1
+      if idleCnt>50000:
+          for i in range(3):
+              car.pixels[i] = (0,0,0)
+          car.pixels.show()
+      else:
+          car.pixelsRotation()
+      car.buttons_update()
+      if car.button_A_wasPressed:
+          running = True
+          idleCnt = 0
+          print('running')
+      if car.button_B_wasPressed:
+          running = False
+          car.stop()
+          idleCnt = 0
+          print('stopping')
+      if running:
+          idleCnt = 0
+          dir = checkDirection()
+          if dir==0:
+              car.stop()
+          elif dir==1:
+              scale = int(diff/df_scale)
+              if scale<len(speedsList):
+                  s = speedsList[scale]
+              else:
+                  s = speedsList[3]
+              car.motor(int(s*0.4), s)
+          elif dir==2:
+              scale = int(diff/df_scale)
+              if scale<len(speedsList):
+                  s = speedsList[scale]
+              else:
+                  s = speedsList[3]
+              car.motor(s, int(s*0.4))
+          else:
+              car.motor(carMaxSpeed, carMaxSpeed)
+          time.sleep(0.01)
+      else:
+          pass
 
 ---------------------------------
 
@@ -500,8 +679,18 @@ RunGo的前部带有一对光线强度传感器能够识别前方光线的方向
     - 变量
     - 变量赋值
     - 变量自增/自减
+    - 逻辑组合
     - 逻辑判断和逻辑程序块
-    - 本节中，你总计完成了19行代码的编写工作
+    - 循环和嵌套循环
+    - 函数及其定义
+    - RGB彩灯及其接口与光效控制
+    - 小车方向、速度
+    - 小车转弯(差速)
+    - 颜色识别
+    - 光电反射传感器
+    - 巡线/循迹传感器
+    - 超声波测距传感器
+    - 本节中，你总计完成了84行代码的编写工作
 
 
 .. Important::
