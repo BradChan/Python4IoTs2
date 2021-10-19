@@ -21,6 +21,10 @@ IoTs2支持Scratch图形化编程语言和Python脚本编程语言，采用“�
   :scale: 30%
   :align: center
 
+.. image::  _static/images/iots2v2_resource_pin_usage.jpg
+  :scale: 30%
+  :align: center
+
 .. image::  _static/images/IoTs2.jpg
   :scale: 30%
   :align: center

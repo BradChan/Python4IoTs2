@@ -22,6 +22,17 @@ IoTs2的磁盘映射分为2种：BootLoader磁盘和Python解释器磁盘。进�
   :scale: 25%
   :align: center
 
+（IoTs2_v1)
+
+.. image::  ../_static/images/iots2v2_msc_disk_mode.jpg
+  :scale: 25%
+  :align: center
+
+（IoTs2_v2)
+
+注意：IoTs2v2升级Python固件的方法略有改变，主要原因是二级Bootloader已经改变。
+
+
 BootLoader磁盘的名称为IOTS2BOOT，将IoTs2的固件文件拖放到该磁盘即可更新/升级Python解释器；
 Python解释器磁盘的名称为CIRCUITPY，将我们编写的Python脚本程序保存到该磁盘根目录的code.py文件即为下载/更新应用程序。
 
@@ -33,6 +44,18 @@ BootLoader模式(可更新Python解释器固件)、Python的正常模式(立即�
   :scale: 25%
   :align: center
 
+（IoTs2_v1)
+
+.. image::  ../_static/images/iots2v2_bootloader_python_safe_mode.jpg
+  :scale: 25%
+  :align: center
+
+（IoTs2_v2)
+
+注意：IoTs2v2的工作模式也稍有改变，ROM-Bootloader模式可更新二级Bootloader和Aruduino固件；启动二级Booloader的方法也稍有改变；
+等待进入Python安全模式的黄色指示灯是闪烁状态(在v1板上不闪烁)。
+
+
 为什么需要Python的安全模式呢？当我们编写的某些Python脚本程序并保存到Python磁盘(即CIRCUITPY磁盘)之后或许引起某些严重问题，
 Python的安全模式将不执行“问题”程序让我们有机会修改他们。
 
@@ -42,7 +65,8 @@ IoTs2的Python脚本程序是什么样的呢？譬如下面的代码是Python脚
   :linenos:
 
   import time
-  from hiibot_iots2 import IoTs2
+  #from hiibot_iots2 import IoTs2  # IoTs2
+  from hiibot_iots2v2 import IoTs2  # IoTs2v2
   iots2 = IoTs2()
   iots2.blueLED_bright = 1.0
   while True:
@@ -55,4 +79,5 @@ IoTs2的Python脚本程序是什么样的呢？譬如下面的代码是Python脚
 前两行分别导入time库、IoTs2库，第3行代码将IoTs2类实例化为名叫“iots2”的对象，第4行代码则设置蓝色LED的亮度属性为1.0(即最亮)，
 在无穷循环程序中重复执行 1) 切换蓝色LED的状态；2) 睡眠0.5秒。
 
+注意：IoTs2v2的库文件名称为“hiibot_iots2v2”，v1和v2两种板上硬件资源的分配略有不同。
 

@@ -16,5 +16,15 @@ IoTs2具有18个可编程I/O(呈DIP排列)。
   :scale: 25%
   :align: center
 
+(IoTs2_v1)
+
+
+.. image::  ../_static/images/iots2v2_structure.jpg
+  :scale: 25%
+  :align: center
+
+(IoTs2_v2)
+
+
 
 

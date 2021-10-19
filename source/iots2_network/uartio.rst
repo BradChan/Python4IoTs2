@@ -43,7 +43,8 @@ UART的应用场景大多数是2个系统之间的互联通讯，当我们手上
 
   import time               # time moudle
   import board, busio       # board and busio modules
-  from hiibot_iots2 import  IoTs2     # use the Button and BlueLED of IoTs2
+  #from hiibot_iots2 import  IoTs2     # use the Button and BlueLED of IoTs2
+  from hiibot_iots2v2 import  IoTs2     # use the Button and BlueLED of IoTs2v2
   iots2 = IoTs2()
   iots2.blueLED_bright = 1.0          # turn on BlueLED
   uart = busio.UART(
@@ -81,26 +82,26 @@ UART的应用场景大多数是2个系统之间的互联通讯，当我们手上
 
   - 第1行，导入time模块
   - 第2行，导入board和busio两个IoTs2的Python解释器内建的模块。board模块定义IoTs2的所有GPIO引脚名，busio模块的UART子类是本示例的核心
-  - 第3行，从/lib/hiibot_iots2.py模块中导入IoTs2类
-  - 第4行，将IoTs2类实例化为iots2对象
-  - 第5行，将iots2对象的blueLED_bright属性(即BlueLED的亮度)设置为1.0(即最亮)
-  - 第6～10行，将busio.UART实例化为uart对象，并指定该对象的TxD和RxD引脚分别为board.IO17和board.IO18，波特率为115200，超时等待时间为0.01秒，接收缓冲区仅1个字节
-  - 第11行，清空uart对象的接收缓冲区，丢弃以前的接收数据
-  - 第12行，定义一个名叫outBuf的字节数组(即bytearray型)当作发送缓冲区，本示例每次仅发送一个字节，因此该数组的长度为1
-  - 第13行，向Python解释器的串口控制台(如MU编辑器的串口控制台)和LCD屏幕输出提示信息
-  - 第14行，定义一个无穷循环
-  - 第15行，(无穷循环的第1行) 更新iots2对象的按钮状态
-  - 第16行，(无穷循环的第2行) 检查iots2对象的按钮是否已被点击，如果被点击则执行以下三行语句
-  - 第17～19行，(无穷循环的第3～5行) 当前一句if条件满足时，首先设置outBuf[0]为0，然后调用uart对象的write接口将outBuf中的这个数据发送出去，最后向控制台/LCD输出提示信息
-  - 第20行，(无穷循环的第6行) 判断uart对象的in_waiting属性值是否大于0，如果大于0则执行下面的12行语句，否则继续下一个无穷循环
-  - 第21～22行，(无穷循环的第7～8行) 如果uart.in_waiting属性值大于0，则调用uart对象的read接口将接收缓冲区的数据读到inBuf数组，如果inBuf数组是非空的则执行下面的10行语句，否则继续下一个无穷循环
-  - 第23行，(无穷循环的第9行) 切换iots2对象的BlueLED状态
-  - 第24行，(无穷循环的第10行) 延迟0.1秒
-  - 第25行，(无穷循环的第11行) 向控制台或LCD屏幕输出提示信息，其中包含接收到的数据的十进制表示
-  - 第26～29行，(无穷循环的第12～15行) 将outBuf[0]设置为inBuf[0]+1，如果加1后的值大于255则设置outBuf[0]=0(即从255回滚到0)。注意：这4个语句是“数字接龙”游戏的关键
-  - 第30行，(无穷循环的第16行) 使用uart对象的write接口将outBuf[0]发送出去
-  - 第31行，(无穷循环的第17行) 切换iots2对象的BlueLED状态
-  - 第32行，(无穷循环的第18行) 延迟0.1秒
+  - 第3行和第4行，从/lib/hiibot_iots2.py模块或/lib/hiibot_iots2v2.py模块中导入IoTs2类
+  - 第5行，将IoTs2类实例化为iots2对象
+  - 第6行，将iots2对象的blueLED_bright属性(即BlueLED的亮度)设置为1.0(即最亮)
+  - 第7～11行，将busio.UART实例化为uart对象，并指定该对象的TxD和RxD引脚分别为board.IO17和board.IO18，波特率为115200，超时等待时间为0.01秒，接收缓冲区仅1个字节
+  - 第12行，清空uart对象的接收缓冲区，丢弃以前的接收数据
+  - 第13行，定义一个名叫outBuf的字节数组(即bytearray型)当作发送缓冲区，本示例每次仅发送一个字节，因此该数组的长度为1
+  - 第14行，向Python解释器的串口控制台(如MU编辑器的串口控制台)和LCD屏幕输出提示信息
+  - 第15行，定义一个无穷循环
+  - 第16行，(无穷循环的第1行) 更新iots2对象的按钮状态
+  - 第17行，(无穷循环的第2行) 检查iots2对象的按钮是否已被点击，如果被点击则执行以下三行语句
+  - 第18～20行，(无穷循环的第3～5行) 当前一句if条件满足时，首先设置outBuf[0]为0，然后调用uart对象的write接口将outBuf中的这个数据发送出去，最后向控制台/LCD输出提示信息
+  - 第21行，(无穷循环的第6行) 判断uart对象的in_waiting属性值是否大于0，如果大于0则执行下面的12行语句，否则继续下一个无穷循环
+  - 第22～23行，(无穷循环的第7～8行) 如果uart.in_waiting属性值大于0，则调用uart对象的read接口将接收缓冲区的数据读到inBuf数组，如果inBuf数组是非空的则执行下面的10行语句，否则继续下一个无穷循环
+  - 第24行，(无穷循环的第9行) 切换iots2对象的BlueLED状态
+  - 第25行，(无穷循环的第10行) 延迟0.1秒
+  - 第26行，(无穷循环的第11行) 向控制台或LCD屏幕输出提示信息，其中包含接收到的数据的十进制表示
+  - 第27～30行，(无穷循环的第12～15行) 将outBuf[0]设置为inBuf[0]+1，如果加1后的值大于255则设置outBuf[0]=0(即从255回滚到0)。注意：这4个语句是“数字接龙”游戏的关键
+  - 第31行，(无穷循环的第16行) 使用uart对象的write接口将outBuf[0]发送出去
+  - 第32行，(无穷循环的第17行) 切换iots2对象的BlueLED状态
+  - 第33行，(无穷循环的第18行) 延迟0.1秒
 
 请注意本示例程序的第6～10行定义uart对象的方法，如果我们打算使用IoTs2的其他I/O引脚当作uart对象的TxD和RxD，则修改第7行中的I/O引脚编号即可。
 此外，baudrate参数是保障通讯双方正确通讯的基本参数，如果两个系统的此参数不一致将会导致无法正常通讯，务必将通讯双方的该参数配置为相同的值。
@@ -160,7 +161,8 @@ UART子类的更多属性和接口方法请参见本文底部。
   import time               # time moudle
   import random
   import board, busio       # board and busio modules
-  from hiibot_iots2 import  IoTs2     # use the Button and BlueLED of IoTs2
+  #from hiibot_iots2 import  IoTs2     # use the Button and BlueLED of IoTs2
+  from hiibot_iots2v2 import  IoTs2     # use the Button and BlueLED of IoTs2v2
   iots2 = IoTs2()
   iots2.blueLED_bright = 1.0          # turn on BlueLED
   uart = busio.UART(
@@ -269,7 +271,7 @@ UART子类的更多属性和接口方法请参见本文底部。
           resolving(recbuf)
       time.sleep(0.01)
 
-虽然这个示例程序代码看起来很多，111行！但从程序架构角度看，非常好理解。整个示例代码分为3个部分：初始化部分，函数声明(共5个函数)部分，
+虽然这个示例程序代码看起来很多，112行！但从程序架构角度看，非常好理解。整个示例代码分为3个部分：初始化部分，函数声明(共5个函数)部分，
 无穷循环部分。其中初始化部分仅14行代码，无穷循环仅10行代码，其他的代码用于声明5个UART通讯接口的功能函数。5个UART通讯接口的功能函数包括，
 发送一个完整数据帧(参见上图)，发送一个应答数据帧，发送一个接收错误的对应应答数据帧，接收一个完整数据帧(期间并检查是否存在接收错误，
 如果发现接收错误则立即给出错误应答帧)，解析接收到的数据帧并给出应答。

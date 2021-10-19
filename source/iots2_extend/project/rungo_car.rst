@@ -66,8 +66,10 @@ IoTs2+RunGo组成智能小车(实物图)，如下图所示。
   :linenos:
 
   import time
-  from hiibot_iots2 import IoTs2
-  from hiibot_iots2_rungo import RunGo
+  #from hiibot_iots2 import IoTs2  # IoTs2
+  from hiibot_iots2 import IoTs2  # IoTs2v2
+  #from hiibot_iots2_rungo import RunGo
+  from hiibot_iots2v2_rungo import RunGo  # IoTs2v2+RunGo
   iots2 = IoTs2()
   iots2.screen.rotation = 180
   print('Run Go!')
@@ -141,8 +143,10 @@ RunGo小车的底部有一个颜色识别传感器，可用于识别地面的颜
 .. code-block::  python
   :linenos:
 
-  from hiibot_iots2 import IoTs2
-  from hiibot_iots2_rungo import RunGo
+  #from hiibot_iots2 import IoTs2  # IoTs2
+  from hiibot_iots2 import IoTs2  # IoTs2v2
+  #from hiibot_iots2_rungo import RunGo
+  from hiibot_iots2v2_rungo import RunGo  # IoTs2v2+RunGo
   iots2 = IoTs2()
   car = RunGo()
   iots2.pixels.brightness = 0.3
@@ -186,7 +190,8 @@ RunGo小车就在围栏内随意行驶。准备工作：在白色地面或纸上
 
   import time
   # import RunGo module from hiibot_iots2_rungo.py
-  from hiibot_iots2_rungo import RunGo
+  #from hiibot_iots2_rungo import RunGo
+  from hiibot_iots2v2_rungo import RunGo  # IoTs2v2+RunGo
   car = RunGo()
   print("Run Go!")
   # speed=100, 0, forward; 1, backward; 2, rotate-left; 3, rotate-right
@@ -300,8 +305,10 @@ AGV如何实现“沿着规定路线行驶到指定停靠点”呢？有很多�
 
   import time
   import random
-  from hiibot_iots2 import IoTs2
-  from hiibot_iots2_rungo import RunGo
+  #from hiibot_iots2 import IoTs2  # IoTs2
+  from hiibot_iots2 import IoTs2  # IoTs2v2
+  #from hiibot_iots2_rungo import RunGo
+  from hiibot_iots2v2_rungo import RunGo  # IoTs2v2+RunGo
   iots2 = IoTs2()
   iots2.screen.rotation = 180
   car = RunGo()
@@ -416,8 +423,10 @@ AGV避障
   :linenos:
 
   import time
-  from hiibot_iots2 import IoTs2
-  from hiibot_iots2_rungo import RunGo
+  #from hiibot_iots2 import IoTs2  # IoTs2
+  from hiibot_iots2 import IoTs2  # IoTs2v2
+  #from hiibot_iots2_rungo import RunGo
+  from hiibot_iots2v2_rungo import RunGo  # IoTs2v2+RunGo
   iots2 = IoTs2()
   car = RunGo()
   car.stop()
@@ -487,8 +496,10 @@ AGV避障
 
   import time
   import random
-  from hiibot_iots2 import IoTs2
-  from hiibot_iots2_rungo import RunGo
+  #from hiibot_iots2 import IoTs2  # IoTs2
+  from hiibot_iots2 import IoTs2  # IoTs2v2
+  #from hiibot_iots2_rungo import RunGo
+  from hiibot_iots2v2_rungo import RunGo  # IoTs2v2+RunGo
   car = RunGo()
   iots2 = IoTs2()
   car.stop()
@@ -595,8 +606,10 @@ RunGo的前部带有一对光线强度传感器能够识别前方光线的方向
   :linenos:
 
   import time
-  from hiibot_iots2 import IoTs2
-  from hiibot_iots2_rungo import RunGo
+  #from hiibot_iots2 import IoTs2  # IoTs2
+  from hiibot_iots2 import IoTs2  # IoTs2v2
+  #from hiibot_iots2_rungo import RunGo
+  from hiibot_iots2v2_rungo import RunGo  # IoTs2v2+RunGo
   iots2 = IoTs2()
   car = RunGo()
   car.stop()

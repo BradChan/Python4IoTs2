@@ -16,6 +16,5 @@ Scratch图形化编程语言本身是另一种脚本语言——Javascript(看�
 C/C++等编译型编程语言程序代码必须经过专用的编译器、链接器等软件工具转换成机器码，这意味着我们在使用C/C++对IoTs2编程之前必须先在电脑上安装这些工具软件。
 譬如Arduino IDE和ESP IDF等应用程序都支持IoTs2的C/C++开发。安装C/C++编程语言的开发环境并不是一件难事儿，
 我们可以根据乐鑫官网(https://www.espressif.com/)的相关文档安装C/C++编程语言的开发环境所需要的工具软件或应用程序。
-
-
+乐鑫官方的Arduino软件包网址：https://github.com/espressif/arduino-esp32，请参照此链接的说明搭建Arduino IDE的开发环境。
 

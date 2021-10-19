@@ -54,8 +54,9 @@ IoTs2开始自动加载用户程序(code.py)，禁用REPL；
 
     # 从adafruit_turtle中导入turtle画笔模块和颜色模块
     from adafruit_turtle import Color, turtle
-    # 从hiibot_iots2模块中导入IoTs2类，该类的"screen"接口即为显示屏
-    from hiibot_iots2 import IoTs2
+    # 从hiibot_iots2模块或hiibot_iots2v2模块中导入IoTs2类，该类的"screen"接口即为显示屏
+    #from hiibot_iots2 import IoTs2
+    from hiibot_iots2v2 import IoTs2  # IoTs2v2 be used
     # 实例化Screen模块类为screen
     iots2 = IoTs2()
     screen = iots2.screen
@@ -97,7 +98,8 @@ LCD显示器当作turtle画笔的输出设备使用，画笔程序绘制的几�
    :linenos:
 
     from adafruit_turtle import Color, turtle
-    from hiibot_iots2 import IoTs2
+    #from hiibot_iots2 import IoTs2
+    from hiibot_iots2v2 import IoTs2  # IoTs2v2 be used
     iots2 = IoTs2()
     screen = iots2.screen
     colors = [Color.ORANGE, Color.PURPLE]
