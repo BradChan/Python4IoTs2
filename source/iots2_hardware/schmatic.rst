@@ -12,7 +12,7 @@ IoTs2的内部组成单元如下图所示：
 
 
 .. image::  ../_static/images/iots2v2_structure.jpg
-  :scale: 25%
+  :scale: 15%
   :align: center
 
 (IoTs2_v2)
@@ -43,7 +43,7 @@ IoTs2的尺寸规格如下图所示：
 (IoTs2_v1)
 
 .. image::  ../_static/images/iots2v2_size_mm.jpg
-  :scale: 30%
+  :scale: 15%
   :align: center
 
 (IoTs2_v2)

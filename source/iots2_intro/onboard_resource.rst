@@ -11,7 +11,7 @@ IoTs2板载资源
 (IoTs2_v1)
 
 .. image::  ../_static/images/iots2v2_onboard_resources.jpg
-  :scale: 25%
+  :scale: 15%
   :align: center
 
 (IoTs2_v2)

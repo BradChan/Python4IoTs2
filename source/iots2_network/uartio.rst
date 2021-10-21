@@ -43,8 +43,8 @@ UART的应用场景大多数是2个系统之间的互联通讯，当我们手上
 
   import time               # time moudle
   import board, busio       # board and busio modules
-  #from hiibot_iots2 import  IoTs2     # use the Button and BlueLED of IoTs2
-  from hiibot_iots2v2 import  IoTs2     # use the Button and BlueLED of IoTs2v2
+  from hiibot_iots2 import  IoTs2     # use the Button and BlueLED of IoTs2
+
   iots2 = IoTs2()
   iots2.blueLED_bright = 1.0          # turn on BlueLED
   uart = busio.UART(
@@ -82,7 +82,7 @@ UART的应用场景大多数是2个系统之间的互联通讯，当我们手上
 
   - 第1行，导入time模块
   - 第2行，导入board和busio两个IoTs2的Python解释器内建的模块。board模块定义IoTs2的所有GPIO引脚名，busio模块的UART子类是本示例的核心
-  - 第3行和第4行，从/lib/hiibot_iots2.py模块或/lib/hiibot_iots2v2.py模块中导入IoTs2类
+  - 第3行和第4行，从/lib/hiibot_iots2.py模块中导入IoTs2类
   - 第5行，将IoTs2类实例化为iots2对象
   - 第6行，将iots2对象的blueLED_bright属性(即BlueLED的亮度)设置为1.0(即最亮)
   - 第7～11行，将busio.UART实例化为uart对象，并指定该对象的TxD和RxD引脚分别为board.IO17和board.IO18，波特率为115200，超时等待时间为0.01秒，接收缓冲区仅1个字节
@@ -161,8 +161,7 @@ UART子类的更多属性和接口方法请参见本文底部。
   import time               # time moudle
   import random
   import board, busio       # board and busio modules
-  #from hiibot_iots2 import  IoTs2     # use the Button and BlueLED of IoTs2
-  from hiibot_iots2v2 import  IoTs2     # use the Button and BlueLED of IoTs2v2
+  from hiibot_iots2 import  IoTs2     # use the Button and BlueLED of IoTs2
   iots2 = IoTs2()
   iots2.blueLED_bright = 1.0          # turn on BlueLED
   uart = busio.UART(

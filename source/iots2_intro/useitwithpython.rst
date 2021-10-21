@@ -25,7 +25,7 @@ IoTs2的磁盘映射分为2种：BootLoader磁盘和Python解释器磁盘。进�
 （IoTs2_v1)
 
 .. image::  ../_static/images/iots2v2_msc_disk_mode.jpg
-  :scale: 25%
+  :scale: 10%
   :align: center
 
 （IoTs2_v2)
@@ -47,7 +47,7 @@ BootLoader模式(可更新Python解释器固件)、Python的正常模式(立即�
 （IoTs2_v1)
 
 .. image::  ../_static/images/iots2v2_bootloader_python_safe_mode.jpg
-  :scale: 25%
+  :scale: 10%
   :align: center
 
 （IoTs2_v2)
@@ -65,8 +65,7 @@ IoTs2的Python脚本程序是什么样的呢？譬如下面的代码是Python脚
   :linenos:
 
   import time
-  #from hiibot_iots2 import IoTs2  # IoTs2
-  from hiibot_iots2v2 import IoTs2  # IoTs2v2
+  from hiibot_iots2 import IoTs2  # IoTs2
   iots2 = IoTs2()
   iots2.blueLED_bright = 1.0
   while True:
@@ -79,5 +78,4 @@ IoTs2的Python脚本程序是什么样的呢？譬如下面的代码是Python脚
 前两行分别导入time库、IoTs2库，第3行代码将IoTs2类实例化为名叫“iots2”的对象，第4行代码则设置蓝色LED的亮度属性为1.0(即最亮)，
 在无穷循环程序中重复执行 1) 切换蓝色LED的状态；2) 睡眠0.5秒。
 
-注意：IoTs2v2的库文件名称为“hiibot_iots2v2”，v1和v2两种板上硬件资源的分配略有不同。
 
