@@ -126,9 +126,7 @@ BlueFi和电脑互推消息
 
 下图中演示如何使用MQTTBox软件创建新的MQTT客户端、订阅指定主题的消息、发布特定主题的消息。
 
-.. image:: /../../_static/images/iots2_tutorials/mqtt_box_use.gif
-  :scale: 60%
-  :align: center
+(此动画暂缺)
 
 其中的关键步骤如下：
 
@@ -140,7 +138,7 @@ BlueFi和电脑互推消息
 
 然后点击“Public”按钮，你看到下图的消息了吗？
 
-.. image:: /../../_static/images/bluefi_basics/mqtt_4.jpg
+.. image:: /../../_static/images/iots2_tutorials/mqtt_4.jpg
   :scale: 60%
   :align: center
 

@@ -53,9 +53,7 @@ MU软件包。
 
 1) 安装到Windows电脑
 
-.. image:: /../_static/images/iots2_setup/windows_mu_installer.gif
-  :scale: 100%
-  :align: center
+(此动画暂缺)
 
 针对Windows系统的详细安装向导请遵照MU官网的说明 https://codewith.mu/en/howto/1.0/install_windows
 
