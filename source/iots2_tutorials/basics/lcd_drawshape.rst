@@ -30,25 +30,25 @@
   from hiibot_iots2 import IoTs2
   iots2 = IoTs2()
   iots2.screen.rotation = 180
-  shape_group = displayio.Group(max_size=3) # 3 sub-groups
+  shape_group = displayio.Group() # 3 sub-groups
   # Color variables available
   y_initial = 25
   RED, GREEN, GOLD = (255, 0, 0), (0, 255, 0), (255, 222, 30)
   lines, circles = [], []
   # draw 3 lines and append on the lines_subgroup
-  lines_subgroup = displayio.Group(max_size=3)
+  lines_subgroup = displayio.Group()
   for i in range(3):
       lines.append( Line(66+i, 8, 66+i, 230, color=GOLD) )
       lines_subgroup.append(lines[i])
   shape_group.append(lines_subgroup)
   # draw 6 circles and append on the circle_subgroup
-  circle_subgroup = displayio.Group(max_size=6)
+  circle_subgroup = displayio.Group()
   for i in range( 6 ):
       circles.append( Circle(67,y_initial+(i*20), 16, fill=RED, outline=RED) )
       circle_subgroup.append(circles[i])
   shape_group.append(circle_subgroup)
   # create a text label
-  textlabel_subgroup = displayio.Group(max_size=1, scale=2)
+  textlabel_subgroup = displayio.Group(scale=2)
   textlabel = Label(terminalio.FONT,x=18,y=78,text="",max_glyphs=24, color=GREEN)
   textlabel_subgroup.append(textlabel)
   shape_group.append(textlabel_subgroup)
@@ -93,11 +93,11 @@
     - 第11行，从“/CIRCUITPY/lib/hhiibot_iots2.py”模块中导入IoTs2类
     - 第12行，将导入的“IoTs2”类实例化为一个实体对象，名叫“iots2”，本示例将使用“iots2.screen”来访问彩色LCD屏幕
     - 第13行，将IoTs2的屏幕方向调整为竖屏且USB插座在屏幕上方，即屏幕旋转180度
-    - 第14行，声明一个displayio类显示元素群Group型变量，名叫“shape_group”，并指定其包含的最大元素个数为3
+    - 第14行，声明一个displayio类显示元素群Group型变量，名叫“shape_group”
     - 第15行，注释
     - 第16～18行，定义数值变量y_initial，元组变量RED、GREEN和GOLD，以及列表lines和circles
     - 第19行，注释
-    - 第20行，定义一个名叫lines_subgroup的displayio类Group子类的实体对象，并指定其包含的最大元素个数为3
+    - 第20行，定义一个名叫lines_subgroup的displayio类Group子类的实体对象
     - 第21～23行，使用一个3次的循环绘制3个直线，并将每个直线都添加到lines_subgroup中
     - 第24行，将lines_subgroup添加到shape_group中
     - 第25～30行，定义displayio类Group子类的实体对象circle_subgroup，并添加6个红色填充圆(6个糖葫芦的果子)，最后把circle_subgroup添加到shape_group中
@@ -124,7 +124,7 @@
 --------------------------------
 
 游戏和动画相比较，游戏增加了交互设计，增加游戏输入和游戏的规则，即可将动画变成游戏。下面的示例是将前一个“糖葫芦”动画效果的示例代码修改为“吃糖葫芦”游戏，
-游戏的输入仅有一个按钮，即IoTs2的板载按钮(IO21)。游戏规则也十分地简单：当按下按钮一次即吃掉一个果子，6个果子全部吃掉后显示吃果子的总耗时。
+游戏的输入仅有一个按钮，即IoTs2的板载按钮(IO21)或IoTs2v2的板载按钮(IO0)。游戏规则也十分地简单：当按下按钮一次即吃掉一个果子，6个果子全部吃掉后显示吃果子的总耗时。
 示例代码如下：
 
 .. code-block::  python
@@ -143,25 +143,25 @@
   from hiibot_iots2 import IoTs2
   iots2 = IoTs2()
   iots2.screen.rotation = 180
-  shape_group = displayio.Group(max_size=3) # 3 sub-groups
+  shape_group = displayio.Group() # 3 sub-groups
   # Color variables available for import.
   RED, GREEN, GOLD = (255, 0, 0), (0, 255, 0), (255, 222, 30)
   lines, circles = [], []
   # draw 3 lines and append on the lines_subgroup
-  lines_subgroup = displayio.Group(max_size=3)
+  lines_subgroup = displayio.Group()
   for i in range(3):
       lines.append( Line(66+i, 8, 66+i, 230, color=GOLD) )
       lines_subgroup.append(lines[i])
   shape_group.append(lines_subgroup)
   # draw 6 circles and append on the circle_subgroup
   y_initial = 25
-  circle_subgroup = displayio.Group(max_size=6)
+  circle_subgroup = displayio.Group()
   for i in range( 6 ):
       circles.append( Circle(67,y_initial+(i*20), 16, fill=RED, outline=RED) )
       circle_subgroup.append(circles[i])
   shape_group.append(circle_subgroup)
   # create a text label
-  textlabel_subgroup = displayio.Group(max_size=1, scale=2)
+  textlabel_subgroup = displayio.Group(scale=2)
   textlabel = Label(terminalio.FONT,x=18,y=88,text="",max_glyphs=24, color=GREEN)
   textlabel_subgroup.append(textlabel)
   shape_group.append(textlabel_subgroup)
@@ -206,7 +206,7 @@
   :scale: 25%
   :align: center
 
-如果你把本示例代码保存到IoTs2的/CIRCUITPY/code.py文件中，当你看到IoTs2执行该程序的效果时，请你立即按下IoTs2的按钮(IO21)，
+如果你把本示例代码保存到IoTs2的/CIRCUITPY/code.py文件中，当你看到IoTs2执行该程序的效果时，请你立即按下IoTs2的按钮(IO21)或IoTs2v2的按钮(IO0)，
 将会看到一个果子移出“糖葫芦”的木棒(模拟被吃掉的效果)，再按下按钮后另外一个果子也会被“吃掉”，继续重复，然后看自己总耗时是多久，
 跟其他人比一比看谁吃得快。这是一中非常有趣的小游戏。
 

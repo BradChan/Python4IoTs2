@@ -28,7 +28,7 @@ IoTs2有一个1.14寸的彩色LCD屏幕，分辨率为240x135点阵，点间距�
   from adafruit_display_text import label 
   from hiibot_iots2 import IoTs2
   iots2 = IoTs2()
-  text_group = displayio.Group(max_size=8, scale=2)
+  text_group = displayio.Group(scale=2)
   text0 = label.Label(terminalio.FONT, x=0, y=0,  text="", max_glyphs=24,  color=(255,0,0))
   text1 = label.Label(terminalio.FONT, x=0, y=9,  text="", max_glyphs=24, color=(192,63,0))
   text2 = label.Label(terminalio.FONT, x=0, y=18, text="", max_glyphs=24,  color=(127,127,0))
@@ -92,7 +92,7 @@ IoTs2有一个1.14寸的彩色LCD屏幕，分辨率为240x135点阵，点间距�
   from adafruit_display_text import label
   from hiibot_iots2 import IoTs2
   iots2 = IoTs2()
-  text_group = displayio.Group(max_size=8, scale=2)
+  text_group = displayio.Group(scale=2)
   text0 = label.Label(terminalio.FONT, x=8, y=6,  text="Hi, IoTs2", scale=2, max_glyphs=24,  color=(255,0,0))
   text1 = label.Label(terminalio.FONT, x=0, y=20, text="", max_glyphs=24, color=(192,63,0))
   text2 = label.Label(terminalio.FONT, x=0, y=29, text="", max_glyphs=24,  color=(127,127,0))
@@ -167,7 +167,7 @@ IoTs2有一个1.14寸的彩色LCD屏幕，分辨率为240x135点阵，点间距�
   from adafruit_display_text import label
   from hiibot_iots2 import IoTs2
   iots2 = IoTs2()
-  text_group = displayio.Group(max_size=1, scale=2)
+  text_group = displayio.Group(scale=2)
   textLabel = label.Label( 
                       terminalio.FONT,    # font of the text label
                       x=20, y=30,         # initial position
@@ -261,7 +261,7 @@ IoTs2有一个1.14寸的彩色LCD屏幕，分辨率为240x135点阵，点间距�
   from adafruit_display_text import label
   from hiibot_bluebox5 import BlueBox5
   iots2 = BlueBox5()
-  text_group = displayio.Group(max_size=1, scale=2)
+  text_group = displayio.Group(scale=2)
   textLabel = label.Label( 
                       terminalio.FONT,    # font of the text label
                       x=20, y=30,         # initial position

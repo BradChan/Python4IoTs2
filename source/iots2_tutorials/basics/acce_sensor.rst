@@ -44,7 +44,7 @@ IoTs2采用3D的动静态型加速度计，即使在静止状态，IoTs2的加�
   iots2 = IoTs2()
   iots2.screen.rotation = 180
   # create a text label
-  textlabel_group = displayio.Group(max_size=4, scale=2)
+  textlabel_group = displayio.Group(scale=2)
   textLabel_title = Label(terminalio.FONT, x=10, y=10, text="Acce", max_glyphs=10, scale=2, color=(255,0,0))
   textLabel_x = Label(terminalio.FONT, x=10, y=32, text="", max_glyphs=24, color=(255,0,0))
   textLabel_y = Label(terminalio.FONT, x=10, y=48, text="", max_glyphs=24, color=(0,255,0))
@@ -102,7 +102,7 @@ z并观察结果。
   iots2 = IoTs2()
   iots2.screen.rotation = 180
   # create a text label
-  textlabel_group = displayio.Group(max_size=6, scale=2)
+  textlabel_group = displayio.Group(scale=2)
   textLabel_title = Label(terminalio.FONT, x=9, y=10, text="Acce", max_glyphs=10, scale=2, color=(255,0,0))
   textLabel_x = Label(terminalio.FONT, x=1, y=32, text="", max_glyphs=24, color=(255,0,0))
   textLabel_y = Label(terminalio.FONT, x=1, y=48, text="", max_glyphs=24, color=(0,255,0))
